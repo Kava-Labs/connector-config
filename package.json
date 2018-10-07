@@ -1,0 +1,31 @@
+{
+  "name": "connector-config",
+  "version": "1.0.0",
+  "description": "",
+  "main": "ilp-connector.config.js",
+  "scripts": {
+    "connector": "pm2 start ./ilp-connector.config.js",
+    "admin": "pm2 start ./node_modules/moneyd-gui -- --admin-api-port 7769"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Kava-Labs/connector-config.git"
+  },
+  "author": "",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/Kava-Labs/connector-config/issues"
+  },
+  "homepage": "https://github.com/Kava-Labs/connector-config#readme",
+  "dependencies": {
+    "bignumber.js": "^7.2.1",
+    "ilp-backend-coinmarketcap": "github:kava-labs/ilp-backend-coinmarketcap",
+    "ilp-connector": "^22.1.0",
+    "ilp-plugin-ethereum": "^3.0.0-beta.3",
+    "ilp-plugin-mini-accounts": "^3.5.1",
+    "ilp-plugin-xrp-asym-server": "^1.7.2",
+    "ilp-plugin-xrp-paychan": "^2.4.0",
+    "ilp-store-redis": "0.0.0",
+    "moneyd-gui": "^0.1.2"
+  }
+}
