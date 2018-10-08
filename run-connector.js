@@ -19,6 +19,7 @@ const connector = createApp({
     // Servers
     eth: require('./plugins/eth.config.js'),
     xrp: require('./plugins/xrp.config.js'),
+    btc: require('./plugins/btc.config.js'),
     // Moneyd
     local: require('./plugins/mini-accounts.config.js')
   }
