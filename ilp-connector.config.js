@@ -6,6 +6,7 @@ module.exports = {
     env: {
       DEBUG: 'ilp*'
     },
+    node_args: ['--inspect'],
     script: path.resolve(__dirname, 'run-connector.js'),
   }]
 }
