@@ -25,7 +25,7 @@
     "ilp-plugin-mini-accounts": "^3.5.1",
     "ilp-plugin-xrp-asym-server": "^1.7.2",
     "ilp-plugin-xrp-paychan": "^2.4.0",
-    "ilp-store-redis": "0.0.0",
+    "ilp-store-redis": "github:interledgerjs/ilp-store-redis#ko-fix-null-promise",
     "moneyd-gui": "^0.1.2"
   }
 }
