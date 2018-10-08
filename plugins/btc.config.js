@@ -2,7 +2,7 @@ const { convert, Unit } = require('ilp-plugin-lightning/build/account')
 
 module.exports = {
   relation: 'child',
-  plugin: 'ilp-plugin-lighting',
+  plugin: 'ilp-plugin-lightning',
   assetCode: 'BTC',
   assetScale: 8,
   options: {
