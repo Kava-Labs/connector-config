@@ -5,7 +5,7 @@ const connector = createApp({
   adminApi: true,
   adminApiPort: 7769,
   ilpAddress: 'g.kava',
-  backend: 'ilp-backend-coinmarketcap',
+  backend: 'ecb-plus-coinmarketcap',
   spread: 0,
   store: 'ilp-store-redis',
   storeConfig: {
