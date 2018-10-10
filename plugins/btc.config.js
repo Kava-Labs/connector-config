@@ -15,7 +15,7 @@ module.exports = {
       lndHost: process.env.LND_PEERHOST,
     },
     port: 7441,
-    maxPacketAmount: convert(0.000005, Unit.BTC, Unit.Satoshi),
+    maxPacketAmount: convert(0.00001, Unit.BTC, Unit.Satoshi),
     balance: {
       maximum: '0',
       settleTo: '0',
