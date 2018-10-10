@@ -8,7 +8,7 @@ module.exports = {
   options: {
     role: 'server',
     ethereumPrivateKey: process.env.KOVAN_PRIVATE,
-    ethereumProvider: 'https://kovan.infura.io/bXIbx0x6ofEuDANTSeKI',
+    ethereumProvider: 'https://mainnet.infura.io/bXIbx0x6ofEuDANTSeKI',
     port: 7442,
     incomingChannelFee: 0,
     maxPacketAmount: convert('0.0002', Unit.Eth, Unit.Gwei).toString(),
