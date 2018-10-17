@@ -1,7 +1,8 @@
+require('envkey')
 const { createApp } = require('ilp-connector')
 
 const connector = createApp({
-  env: 'production',
+  env: 'development',
   adminApi: true,
   adminApiPort: 7769,
   ilpAddress: 'g.kava',

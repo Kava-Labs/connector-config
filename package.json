@@ -19,6 +19,7 @@
   "homepage": "https://github.com/Kava-Labs/connector-config#readme",
   "dependencies": {
     "bignumber.js": "^7.2.1",
+    "envkey": "^1.2.2",
     "ilp-backend-coinmarketcap": "github:kava-labs/ilp-backend-coinmarketcap",
     "ilp-connector": "^22.1.0",
     "ilp-plugin-ethereum": "^3.0.0-beta.3",

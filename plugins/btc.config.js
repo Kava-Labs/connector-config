@@ -7,12 +7,12 @@ module.exports = {
   assetScale: 8,
   options: {
     role: 'server',
-    lndIdentityPubkey: process.env.LND_PUBKEY,
-    lndHost: process.env.LND_PEERHOST,
+    lndIdentityPubkey: process.env.LIGHTNING_LND_IDENTITY_PUBKEY,
+    lndHost: process.env.LIGHTNING_LND_HOST,
     lnd: {
-      tlsCertPath: process.env.LND_TLSCERT,
-      macaroonPath: process.env.LND_MACAROON,
-      lndHost: process.env.LND_PEERHOST,
+      tlsCertPath: process.env.LIGHTNING_TLS_CERT_PATH,
+      macaroonPath: process.env.LIGHTNING_MACAROON_PATH,
+      lndHost: process.env.LIGHTNING_LND_HOST,
     },
     port: 7441,
     maxPacketAmount: convert(0.00001, Unit.BTC, Unit.Satoshi),

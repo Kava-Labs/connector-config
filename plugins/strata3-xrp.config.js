@@ -19,7 +19,7 @@ module.exports = {
     assetScale: 9,
     listener: {
       port: 7444,
-      secret: process.env.STRATA_3_SECRET
+      secret: process.env.XRP_STRATA_3_SECRET,
     },
     xrpServer: 'wss://s2.ripple.com',
     address: process.env.XRP_ADDRESS,
