@@ -1,5 +1,9 @@
 require('envkey')
 const { createApp } = require('ilp-connector')
+const util = require('util')
+Object.assign(util.inspect.defaultOptions, { depth: 4, sorted: true, showHidden: false, showProxy: false, compact: false, breakLength: Infinity, maxArrayLength: Infinity, colors: true })
+Object.assign(util.inspect.styles, { string: 'green', regexp: 'green', date: 'green', number: 'magenta', boolean: 'blue', undefined: 'red', null: 'red', symbol: 'cyan', special: 'cyan' })
+
 
 const connector = createApp({
   env: process.env.CONNECTOR_ENV,
@@ -16,7 +20,7 @@ const connector = createApp({
   },
   accounts: {
     // Peers
-    'strata3-xrp': require('./plugins/strata3-xrp.config.js'),
+    'strata4-xrp': require('./plugins/strata4-xrp.config.js'),
     // Servers
     eth: require('./plugins/eth.config.js'),
     xrp: require('./plugins/xrp.config.js'),
@@ -26,4 +30,5 @@ const connector = createApp({
   }
 })
 
+console.info('config ->', util.inspect(config))
 connector.listen()

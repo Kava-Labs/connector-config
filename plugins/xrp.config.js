@@ -9,7 +9,7 @@ module.exports = {
   options: {
     assetScale: 9,
     port: 7443,
-    xrpServer: 'wss://s1.ripple.com',
+    xrpServer: process.env.XRP_SERVER,
     address: process.env.XRP_ADDRESS,
     secret: process.env.XRP_SECRET,
     maxPacketAmount
