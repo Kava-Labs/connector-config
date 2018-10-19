@@ -2,10 +2,10 @@ require('envkey')
 const { createApp } = require('ilp-connector')
 
 const connector = createApp({
-  env: 'production',
+  env: process.env.CONNECTOR_ENV,
   adminApi: true,
   adminApiPort: 7769,
-  ilpAddress: 'g.kava',
+  ilpAddress: process.env.ILP_ADDRESS,
   backend: 'ecb-plus-coinmarketcap',
   spread: 0,
   store: 'ilp-store-redis',
