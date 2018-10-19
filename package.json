@@ -2,10 +2,11 @@
   "name": "connector-config",
   "version": "1.0.0",
   "description": "",
-  "main": "ilp-connector.config.js",
   "scripts": {
-    "connector": "pm2 start ./ilp-connector.config.js",
-    "admin": "pm2 start ./node_modules/moneyd-gui -- --admin-api-port 7769"
+    "start": "npm stop && pm2 start ecosystem.config.js",
+    "stop": "pm2 delete ecosystem.config.js",
+    "restart": "npm start && npm run logs",
+    "logs": "pm2 logs --lines=0"
   },
   "repository": {
     "type": "git",
@@ -22,7 +23,7 @@
     "envkey": "^1.2.2",
     "ilp-backend-coinmarketcap": "github:kava-labs/ilp-backend-coinmarketcap",
     "ilp-connector": "^22.1.0",
-    "ilp-plugin-ethereum": "^3.0.0-beta.3",
+    "ilp-plugin-ethereum": "next",
     "ilp-plugin-lightning": "next",
     "ilp-plugin-mini-accounts": "^3.5.1",
     "ilp-plugin-xrp-asym-server": "^1.7.2",
