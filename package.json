@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
+  	"help": "npm run",
     "start": "npm stop && pm2 start ecosystem.config.js",
     "stop": "pm2 delete ecosystem.config.js",
     "restart": "npm start && npm run logs",
