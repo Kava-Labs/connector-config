@@ -11,7 +11,7 @@ module.exports = {
     ethereumProvider: process.env.ETHEREUM_PROVIDER,
     port: 7442,
     incomingChannelFee: 0,
-    maxPacketAmount: convert('0.002', Unit.Eth, Unit.Gwei).toString(),
+    // maxPacketAmount: convert('0.002', Unit.Eth, Unit.Gwei).toString(),
     outgoingChannelAmount: convert('0.05', Unit.Eth, Unit.Gwei).toString(),
     balance: {
       maximum: '0',
