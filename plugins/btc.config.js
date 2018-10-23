@@ -15,11 +15,11 @@ module.exports = {
       lndHost: process.env.LIGHTNING_LND_HOST,
     },
     port: 7441,
-    maxPacketAmount: convert(0.00001, Unit.BTC, Unit.Satoshi),
+    maxPacketAmount: convert(0.00005, Unit.BTC, Unit.Satoshi),
     balance: {
       maximum: '0',
       settleTo: '0',
-      settleThreshold: '0'
+      settleThreshold: '-250'
     }
   }
 }
