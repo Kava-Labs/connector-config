@@ -4,6 +4,7 @@
   "description": "",
   "scripts": {
     "help": "npm run",
+    "dev": "pm2-runtime start ecosystem.config.js",
     "start": "npm stop && pm2 start ecosystem.config.js",
     "stop": "pm2 delete ecosystem.config.js",
     "restart": "npm start && npm run logs",
