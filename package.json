@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-  	"help": "npm run",
+    "help": "npm run",
     "start": "npm stop && pm2 start ecosystem.config.js",
     "stop": "pm2 delete ecosystem.config.js",
     "restart": "npm start && npm run logs",
@@ -22,10 +22,9 @@
   "dependencies": {
     "bignumber.js": "^7.2.1",
     "envkey": "^1.2.2",
-    "ilp-backend-coinmarketcap": "github:kava-labs/ilp-backend-coinmarketcap",
     "ilp-connector": "^22.1.0",
-    "ilp-plugin-ethereum": "next",
-    "ilp-plugin-lightning": "next",
+    "ilp-plugin-ethereum": "3.0.0-beta.5",
+    "ilp-plugin-lightning": "1.0.0-beta.8",
     "ilp-plugin-mini-accounts": "^3.5.1",
     "ilp-plugin-xrp-asym-server": "^1.7.2",
     "ilp-plugin-xrp-paychan": "github:d1no007/ilp-plugin-xrp-paychan",
