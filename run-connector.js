@@ -1,6 +1,6 @@
 const util = require('util')
-Object.assign(util.inspect.defaultOptions, { depth: 4, sorted: true, showHidden: false, showProxy: false, compact: false, breakLength: Infinity, maxArrayLength: Infinity, colors: true })
-Object.assign(util.inspect.styles, { string: 'green', regexp: 'green', date: 'green', number: 'magenta', boolean: 'blue', undefined: 'red', null: 'red', symbol: 'cyan', special: 'cyan' })
+// Object.assign(util.inspect.defaultOptions, { depth: 4, sorted: true, showHidden: false, showProxy: false, compact: false, breakLength: Infinity, maxArrayLength: Infinity, colors: true })
+// Object.assign(util.inspect.styles, { string: 'green', regexp: 'green', date: 'green', number: 'magenta', boolean: 'blue', undefined: 'red', null: 'red', symbol: 'cyan', special: 'cyan' })
 
 const config = {
 	env: process.env.CONNECTOR_ENV,
