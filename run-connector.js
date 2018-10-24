@@ -15,6 +15,7 @@ const config = {
 	spread: 0,
 	store: 'ilp-store-redis',
 	storeConfig: {
+		password: process.env.REDIS_PASS,
 		prefix: 'connector',
 		host: '127.0.0.1',
 		port: 6379
