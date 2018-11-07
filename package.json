@@ -4,12 +4,11 @@
   "description": "",
   "scripts": {
     "help": "npm run",
-    "start": "npm stop && pm2 start ecosystem.config.js",
     "stop": "pm2 delete ecosystem.config.js",
+    "start": "npm stop && pm2 start ecosystem.config.js",
     "restart": "npm start && npm run logs -- --lines=0",
-    "logs": "pm2 logs",
-    "local": "pm2-runtime start ecosystem.config.js",
-    "node": "DEBUG=* FORCE_COLOR=1 DEBUG_COLORS=yes DEBUG_SHOW_HIDDEN=enabled node -r dotenv/config -r envkey run-connector.js --colors"
+    "dev": "pm2-runtime start ecosystem.config.js",
+    "logs": "pm2 logs"
   },
   "repository": {
     "type": "git",
