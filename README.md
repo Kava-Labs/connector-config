@@ -36,4 +36,8 @@ redis-cli ping
 git clone https://github.com/Kava-Labs/connector-config.git
 npm install
 ```
-
+## Run
+```shell
+npm run start
+# Logs will be in ~/.pm2/logs/ilp-connector-combined.log
+```
