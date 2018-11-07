@@ -12,6 +12,7 @@ const ecosystem = {
 			env: {
 				DEBUG: '*',
 			},
+			log: '~/.pm2/logs/ilp-connector-combined.log',
 		},
 		{
 			cwd: __dirname,
@@ -26,6 +27,14 @@ const ecosystem = {
 		},
 	]
 }
+
+ecosystem.apps.forEach(app => {
+	Object.assign(app.env, {
+		FORCE_COLOR: '1',
+		DEBUG_COLORS: 'yes',
+		DEBUG_SHOW_HIDDEN: 'enabled',
+	})
+})
 
 if (process.env.NODE_ENV == 'development') {
 	console.log(`ecosystem ->`, ecosystem)
