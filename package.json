@@ -34,5 +34,8 @@
     "ilp-plugin-xrp-paychan": "github:d1no007/ilp-plugin-xrp-paychan",
     "ilp-store-redis": "github:interledgerjs/ilp-store-redis#ko-fix-null-promise",
     "moneyd-gui": "^0.1.2"
+  },
+  "devDependencies": {
+    "pm2": "^3.2.2"
   }
 }
