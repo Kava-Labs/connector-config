@@ -48,7 +48,7 @@ npm run dev
 
 **Adding ports to Chrome network targets:**
 * Goto `chrome://inspect/#devices` in your Google Chrome browser and click `Configure...` then add ports counting up from `9229` like so:
-![Discover network targets](https://i.imgur.com/oQQRVgM.png)
+![Discover network targets](https://i.imgur.com/SuPRgrM.png)
 
 ## Production
 Start connector as a long-running background process via PM2 daemon:
