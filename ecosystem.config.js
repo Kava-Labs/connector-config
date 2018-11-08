@@ -1,8 +1,10 @@
 
 const dotenv = require('dotenv')
 const envkey = require('envkey/loader')
+const os = require('os')
 const fs = require('fs')
 const path = require('path')
+const execa = require('execa')
 
 
 
@@ -17,12 +19,9 @@ for (key in env) {
 		env[key] = process.env[key] // pre-existing env have seniority
 	}
 }
-Object.assign(process.env, env, process.env) // apply dotfiles to process.env
+Object.assign(process.env, env, process.env) // apply env to process.env
 
 
-
-const node_args = []
-if (process.env.INSPECT) node_args.push(`--inspect=${process.env.INSPECT}`);
 
 const ecosystem = {
 	apps: [
@@ -30,7 +29,7 @@ const ecosystem = {
 			cwd: __dirname,
 			name: 'ilp-connector',
 			script: path.join(__dirname, 'run-connector.js'),
-			node_args,
+			node_args: [],
 			args: ['--colors'],
 			env: Object.assign({}, env, { // empty `{}` so `env` is not mutated
 				DEBUG: '*',
@@ -41,6 +40,7 @@ const ecosystem = {
 			cwd: __dirname,
 			name: 'moneyd-gui',
 			script: path.join(__dirname, 'node_modules/moneyd-gui'),
+			node_args: [],
 			args: ['--colors'],
 			env: {
 				DEBUG: '*,-koa*',
@@ -48,14 +48,31 @@ const ecosystem = {
 				ADMIN_API_PORT: '7769',
 			},
 		},
-	]
+	],
 }
 
-ecosystem.apps.forEach(app => app.env = Object.assign({}, {
-	FORCE_COLOR: '1',
-	DEBUG_COLORS: 'yes',
-	DEBUG_SHOW_HIDDEN: 'enabled',
-}, app.env))
+let ports = Array.from(Array(os.cpus().length), (v, i) => {
+	return (process.env.INSPECT
+		? parseInt(process.env.INSPECT)
+		: process.debugPort
+	) + i
+})
+
+ecosystem.apps.forEach((app, i) => {
+
+	if (process.env.NODE_ENV != 'production') {
+		let port = execa.shellSync(`get-port ${ports.join(' ')}`).stdout
+		ports = ports.filter(v => v != port)
+		app.node_args.push(`--inspect=${port}`)
+	}
+
+	app.env = Object.assign({}, {
+		FORCE_COLOR: '1',
+		DEBUG_COLORS: 'yes',
+		DEBUG_SHOW_HIDDEN: 'enabled',
+	}, app.env)
+
+})
 
 module.exports = ecosystem
 
