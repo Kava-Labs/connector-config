@@ -1,11 +1,4 @@
 
-const exithook = require('exit-hook')
-const inspector = require('inspector')
-if (process.env.NODE_ENV == 'development') {
-	inspector.open(+process.debugPort)
-	exithook(() => inspector.close())
-}
-
 const config = {
 	env: process.env.CONNECTOR_ENV,
 	adminApi: true,

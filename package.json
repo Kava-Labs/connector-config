@@ -24,7 +24,6 @@
     "bignumber.js": "^7.2.1",
     "dotenv": "^6.1.0",
     "envkey": "^1.2.2",
-    "exit-hook": "^2.0.0",
     "ilp-connector": "^22.1.0",
     "ilp-plugin-ethereum": "next",
     "ilp-plugin-lightning": "next",
