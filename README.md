@@ -46,6 +46,10 @@ npm run dev
 * Automagically find an inspect port counting up, starting from the default port `9229`
 * Or you can manually assign a port to the `INSPECT` environment variable
 
+**Adding ports to Chrome network targets:**
+* Goto `chrome://inspect/#devices` in your Google Chrome browser and click `Configure...` then add ports counting up from `9229` like so:
+![Discover network targets](https://i.imgur.com/oQQRVgM.png)
+
 ## Production
 Start connector as a long-running background process via PM2 daemon:
 ```shell
@@ -53,10 +57,9 @@ npm run start
 # OR
 npm run restart
 ```
-> * PM2 daemon starts connector as a background process
-> * Running `restart` will run `start` and tail the logs
 
 ## Notes
 > * Logs will be in `~/.pm2/logs/ilp-connector-combined.log`
+> * Running `restart` will run `start` and tail the logs
 
 
