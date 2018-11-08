@@ -11,9 +11,18 @@ Object.assign(env, readDotFile('.env')) // parse initial .env file vars and merg
 let ENVKEY = process.env.ENVKEY || env.ENVKEY
 if (ENVKEY) Object.assign(env, envkey.fetch(ENVKEY)); // fetch envkey vars and merge
 Object.assign(env, readDotFile('.env.local')) // parse .env.local file vars and merge
-delete env.ENVKEY // dont expose actual ENVKEY to pm2 apps
+delete process.env.ENVKEY; delete env.ENVKEY // dont expose ENVKEY
+for (key in env) {
+	if (process.env[key] != null) { // if the env var exists already,
+		env[key] = process.env[key] // pre-existing env have seniority
+	}
+}
+Object.assign(process.env, env, process.env) // apply dotfiles to process.env
 
 
+
+const node_args = []
+if (process.env.INSPECT) node_args.push(`--inspect=${process.env.INSPECT}`);
 
 const ecosystem = {
 	apps: [
@@ -21,6 +30,7 @@ const ecosystem = {
 			cwd: __dirname,
 			name: 'ilp-connector',
 			script: path.join(__dirname, 'run-connector.js'),
+			node_args,
 			args: ['--colors'],
 			env: Object.assign({}, env, { // empty `{}` so `env` is not mutated
 				DEBUG: '*',
