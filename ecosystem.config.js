@@ -51,7 +51,7 @@ const ecosystem = {
 	],
 }
 
-let ports = Array.from(Array(os.cpus().length), (v, i) => {
+let ports = Array.from(Array(os.cpus().length * ecosystem.apps.length), (v, i) => {
 	return (process.env.INSPECT
 		? parseInt(process.env.INSPECT)
 		: process.debugPort
