@@ -1,7 +1,7 @@
 {
   "name": "connector-config",
   "version": "1.0.0",
-  "description": "",
+  "description": "Configuration environment for running an ilp-connector",
   "scripts": {
     "stop": "pm2 delete ecosystem.config.js",
     "start": "npm stop && pm2 start ecosystem.config.js",
