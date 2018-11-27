@@ -1,4 +1,4 @@
-const { convert, usd, satoshi } = require('crypto-rate-utils')
+const { convert, usd, satoshi } = require('@kava-labs/crypto-rate-utils')
 
 module.exports = async rateApi => {
   const maxPacketAmount = (await convert(

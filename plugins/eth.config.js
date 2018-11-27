@@ -1,4 +1,4 @@
-const { convert, usd, gwei } = require('crypto-rate-utils')
+const { convert, usd, gwei } = require('@kava-labs/crypto-rate-utils')
 
 module.exports = async rateApi => {
   const outgoingChannelAmount = await convert(usd(10), gwei(), rateApi)

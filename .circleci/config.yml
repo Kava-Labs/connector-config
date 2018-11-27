@@ -21,9 +21,6 @@ jobs:
             - node_modules
           key: v10-dependencies-{{ checksum "package.json" }}
       - run:
-          name: Build and compile
-          command: npm run build
-      - run:
           name: Check formatting
           command: npm run format:check
       - persist_to_workspace:
