@@ -3,12 +3,14 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "help": "npm run",
     "stop": "pm2 delete ecosystem.config.js",
     "start": "npm stop && pm2 start ecosystem.config.js",
     "restart": "npm start && npm run logs -- --lines=0",
     "dev": "pm2-runtime start ecosystem.config.js",
-    "logs": "pm2 logs"
+    "logs": "pm2 logs",
+    "format": "prettier '**/*.{js,ts,json}' --ignore-path .gitignore",
+    "format:check": "npm run format -- --list-different",
+    "fix": "npm run format -- --write"
   },
   "repository": {
     "type": "git",
@@ -34,8 +36,13 @@
     "moneyd-gui": "^0.1.2"
   },
   "devDependencies": {
-    "execa": "^1.0.0",
     "get-port-cli": "^2.0.0",
-    "pm2": "^3.2.2"
+    "husky": "^1.2.0",
+    "prettier": "^1.15.2"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run format:check"
+    }
   }
 }
