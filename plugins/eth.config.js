@@ -1,8 +1,8 @@
 const { convert, usd, gwei } = require('@kava-labs/crypto-rate-utils')
 
-module.exports = async rateApi => {
-  const outgoingChannelAmount = await convert(usd(10), gwei(), rateApi)
-  const maxPacketAmount = (await convert(usd(0.1), gwei(), rateApi)).toString()
+module.exports = rateApi => {
+  const outgoingChannelAmount = convert(usd(10), gwei(), rateApi)
+  const maxPacketAmount = convert(usd(0.1), gwei(), rateApi)
 
   return {
     relation: 'child',
@@ -19,9 +19,9 @@ module.exports = async rateApi => {
       balance: {
         maximum: '0',
         settleTo: '0',
-        settleThreshold: '0'
-      }
-    },
-    maxPacketAmount
+        settleThreshold: '0' // Don't pass 0 as number: falsy value won't get set (bug in plugin)
+      },
+      maxPacketAmount // In plugin (and not connector middleware) so F08s occur *before* T04s
+    }
   }
 }

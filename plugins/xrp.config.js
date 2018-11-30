@@ -1,11 +1,7 @@
 const { convert, usd, xrpBase } = require('@kava-labs/crypto-rate-utils')
 
-module.exports = async rateApi => {
-  const maxPacketAmount = (await convert(
-    usd(0.1),
-    xrpBase(),
-    rateApi
-  )).toString()
+module.exports = rateApi => {
+  const maxPacketAmount = convert(usd(0.1), xrpBase(), rateApi)
 
   return {
     relation: 'child',
@@ -17,8 +13,9 @@ module.exports = async rateApi => {
       port: 7443,
       xrpServer: process.env.XRP_SERVER,
       address: process.env.XRP_ADDRESS,
-      secret: process.env.XRP_SECRET
-    },
-    maxPacketAmount
+      secret: process.env.XRP_SECRET,
+      // Max credit defaults to 0, so it's unnecesssary
+      maxPacketAmount // In plugin (and not connector middleware) so F08s occur *before* T04s
+    }
   }
 }

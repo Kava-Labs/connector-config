@@ -1,12 +1,8 @@
 const { convert, usd, xrpBase } = require('@kava-labs/crypto-rate-utils')
 
-module.exports = async rateApi => {
-  const maxPacketAmount = (await convert(
-    usd(0.1),
-    xrpBase(),
-    rateApi
-  )).toString()
-  const maximum = (await convert(usd(2), xrpBase(), rateApi)).toString()
+module.exports = rateApi => {
+  const maxPacketAmount = convert(usd(0.1), xrpBase(), rateApi).toString()
+  const maximum = convert(usd(2), xrpBase(), rateApi).toString()
 
   return {
     relation: 'peer',
