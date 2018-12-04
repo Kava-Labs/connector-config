@@ -1,34 +1,33 @@
 # connector-config
 
-> Configuration environment for running an `ilp-connector`
+> Configuration environment for running an [`ilp-connector`](https://github.com/interledgerjs/ilp-connector)
 
 ## Prerequisites
 
-<details>
-  <summary>Redis</summary>
+<details><summary>Redis</summary><p>
 
-  Install Redis using `brew` on Mac:
-  ```shell
-  brew install redis
-  ```
+Install Redis using `brew` on Mac:
+```shell
+brew install redis
+```
 
-  Start running the background service:
-  ```shell
-  brew services start redis
-  ```
+Start running the background service:
+```shell
+brew services start redis
+```
 
-  The default configuration should work out of the box. If necessary, however, you can edit it here:
-  ```shell
-  sudo open /usr/local/etc/redis.conf
-  ```
+The default configuration should work out of the box. If necessary, however, you can edit it here:
+```shell
+sudo open /usr/local/etc/redis.conf
+```
 
-  To confirm it works, run:
-  ```shell
-  redis-cli ping
-  ```
+To confirm it works, run:
+```shell
+redis-cli ping
+```
 
-  If that command output `PONG`, you're in business!
-</details>
+If that command output `PONG`, you're in business!
+</p></details>
 
 ## Install
 
