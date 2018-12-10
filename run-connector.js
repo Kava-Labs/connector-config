@@ -1,5 +1,6 @@
 const { createApp } = require('ilp-connector')
 const { connectCoinCap } = require('@kava-labs/crypto-rate-utils')
+const { parse, resolve } = require('path')
 const chokidar = require('chokidar')
 
 async function run() {
@@ -8,9 +9,9 @@ async function run() {
     adminApi: true,
     adminApiPort: 7769,
     ilpAddress: process.env.ILP_ADDRESS,
-    backend: '@kava-labs/ilp-backend-crypto',
     spread: 0,
-    store: 'ilp-store-redis',
+    backend: '@kava-labs/ilp-backend-crypto',
+    store: '@kava-labs/ilp-store-redis',
     storeConfig: {
       password: process.env.REDIS_PASS,
       prefix: 'connector',
@@ -24,47 +25,39 @@ async function run() {
 
   const { listen, addPlugin, removePlugin } = createApp(config)
 
-  const setupWatcher = async accountId => {
-    const path = `./plugins/${accountId}.config.js`
+  // Start the connector
+  await listen()
 
-    // Setup a watcher for the file to hot swap the plugin if the config changes
-    const watcher = chokidar.watch(path, {
-      ignoreInitial: true
-    })
+  // Setup a watcher for the file to hot swap the plugin if the config changes
+  const paths = ['./servers/**/*.js', './peers/*.js']
+  if (process.env.ILP_ADDRESS.startsWith('local')) {
+    paths.push('./peers/*.js')
+  }
+  const watcher = chokidar.watch(paths, {
+    awaitWriteFinish: true
+  })
 
-    const load = async () => {
-      // Create the plugin options to pass to the connector
-      const createConfig = require(path)
-      const accountConfig = await createConfig(rateApi)
+  const add = async path => {
+    const { name: accountId, ext } = parse(path)
+    if (ext === '.js') {
+      const createConfig = require(resolve(path))
+      const accountConfig = createConfig(rateApi)
 
       await addPlugin(accountId, accountConfig)
     }
-
-    const reload = async () => {
-      await removePlugin(accountId)
-      await load()
-    }
-
-    watcher.on('ready', load)
-    watcher.on('change', reload)
   }
 
-  // Start the conenctor
-  await listen()
+  const remove = async path => {
+    const { name: accountId } = parse(path)
+    await removePlugin(accountId)
+  }
 
-  const accountIds = [
-    // Add server plugins
-    'btc',
-    'eth',
-    'xrp',
-    // Add peering plugins (unless running locally)
-    ...(process.env.ILP_ADDRESS.startsWith('local') ? [] : ['strata4-xrp']),
-    // Add mini-accounts (required for moneyd)
-    'local'
-  ]
-
-  // Load all the plugins
-  await Promise.all(accountIds.map(a => setupWatcher(a)))
+  watcher.on('add', add)
+  watcher.on('change', async path => {
+    await remove(path)
+    await add(path)
+  })
+  watcher.on('unlink', remove)
 }
 
 run()
