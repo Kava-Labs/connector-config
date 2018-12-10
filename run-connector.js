@@ -29,8 +29,8 @@ async function run() {
   await listen()
 
   // Setup a watcher for the file to hot swap the plugin if the config changes
-  const paths = ['./servers/**/*.js', './peers/*.js']
-  if (process.env.ILP_ADDRESS.startsWith('local')) {
+  const paths = ['./servers/**/*.js']
+  if (!process.env.ILP_ADDRESS.startsWith('local')) {
     paths.push('./peers/*.js')
   }
   const watcher = chokidar.watch(paths, {
