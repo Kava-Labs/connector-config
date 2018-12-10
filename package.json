@@ -1,14 +1,16 @@
 {
   "name": "connector-config",
   "version": "1.0.0",
-  "description": "",
+  "description": "Configuration environment for running an ilp-connector",
   "scripts": {
-    "help": "npm run",
     "stop": "pm2 delete ecosystem.config.js",
     "start": "npm stop && pm2 start ecosystem.config.js",
     "restart": "npm start && npm run logs -- --lines=0",
     "dev": "pm2-runtime start ecosystem.config.js",
-    "logs": "pm2 logs"
+    "logs": "pm2 logs",
+    "format": "prettier '**/*.{js,ts,json}' --ignore-path .gitignore",
+    "format:check": "npm run format -- --list-different",
+    "fix": "npm run format -- --write"
   },
   "repository": {
     "type": "git",
@@ -21,21 +23,31 @@
   },
   "homepage": "https://github.com/Kava-Labs/connector-config#readme",
   "dependencies": {
+    "@kava-labs/crypto-rate-utils": "^2.0.1",
+    "@kava-labs/ilp-backend-crypto": "^1.1.3",
+    "@kava-labs/ilp-store-redis": "^1.0.2",
     "bignumber.js": "^7.2.1",
-    "dotenv": "^6.1.0",
+    "chokidar": "^2.0.4",
+    "dotenv": "^6.2.0",
     "envkey": "^1.2.2",
-    "ilp-connector": "^22.1.0",
-    "ilp-plugin-ethereum": "next",
-    "ilp-plugin-lightning": "next",
-    "ilp-plugin-mini-accounts": "^3.5.1",
-    "ilp-plugin-xrp-asym-server": "^1.7.2",
-    "ilp-plugin-xrp-paychan": "github:d1no007/ilp-plugin-xrp-paychan",
-    "ilp-store-redis": "github:interledgerjs/ilp-store-redis#ko-fix-null-promise",
-    "moneyd-gui": "^0.1.2"
+    "execa": "^1.0.0",
+    "ilp-connector": "^22.2.0",
+    "ilp-plugin-ethereum": "^3.0.0-beta.8",
+    "ilp-plugin-lightning": "^1.0.0-beta.15",
+    "ilp-plugin-mini-accounts": "^4.0.2",
+    "ilp-plugin-xrp-asym-server": "^1.8.0",
+    "ilp-plugin-xrp-paychan": "^2.4.1",
+    "moneyd-gui": "^0.1.2",
+    "pm2": "^3.2.3"
   },
   "devDependencies": {
-    "execa": "^1.0.0",
     "get-port-cli": "^2.0.0",
-    "pm2": "^3.2.2"
+    "husky": "^1.2.0",
+    "prettier": "^1.15.3"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run format:check"
+    }
   }
 }
