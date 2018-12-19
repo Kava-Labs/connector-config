@@ -1,4 +1,13 @@
 const { convert, usd, gwei } = require('@kava-labs/crypto-rate-utils')
+const axios = require('axios')
+
+const getGasPrice = async () => {
+  const { data } = await axios.get(
+    'https://ethgasstation.info/json/ethgasAPI.json'
+  )
+
+  return convert(gwei(data.fast / 10), wei())
+}
 
 module.exports = rateApi => {
   const outgoingChannelAmount = convert(usd(10), gwei(), rateApi)
@@ -13,6 +22,7 @@ module.exports = rateApi => {
       role: 'server',
       ethereumPrivateKey: process.env.ETHEREUM_PRIVATE_KEY,
       ethereumProvider: process.env.ETHEREUM_PROVIDER,
+      getGasPrice: process.env.CONNECTOR_ENV === 'production' && getGasPrice,
       port: 7442,
       incomingChannelFee: 0,
       outgoingChannelAmount,
