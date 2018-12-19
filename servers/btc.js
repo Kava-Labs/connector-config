@@ -13,8 +13,8 @@ module.exports = rateApi => {
       lndIdentityPubkey: process.env.LIGHTNING_LND_IDENTITY_PUBKEY,
       lndHost: process.env.LIGHTNING_LND_HOST,
       lnd: {
-        tlsCertInput: process.env.LIGHTNING_TLS_CERT_PATH,
-        macaroonInput: process.env.LIGHTNING_MACAROON_PATH,
+        tlsCert: process.env.LIGHTNING_TLS_CERT_PATH,
+        macaroon: process.env.LIGHTNING_MACAROON_PATH,
         lndHost: process.env.LIGHTNING_LND_HOST
       },
       port: 7441,
