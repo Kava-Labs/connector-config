@@ -1,7 +1,7 @@
 const { convert, usd, satoshi } = require('@kava-labs/crypto-rate-utils')
 
 module.exports = rateApi => {
-  const maxPacketAmount = convert(usd(0.1), satoshi(), rateApi)
+  const maxPacketAmount = convert(usd(0.2), satoshi(), rateApi)
 
   return {
     relation: 'child',

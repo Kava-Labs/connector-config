@@ -11,7 +11,7 @@ const getGasPrice = async () => {
 
 module.exports = rateApi => {
   const outgoingChannelAmount = convert(usd(10), gwei(), rateApi)
-  const maxPacketAmount = convert(usd(0.1), gwei(), rateApi)
+  const maxPacketAmount = convert(usd(0.2), gwei(), rateApi)
 
   return {
     relation: 'child',
