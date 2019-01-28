@@ -33,7 +33,7 @@
     "execa": "^1.0.0",
     "ilp-connector": "^22.2.0",
     "ilp-plugin-ethereum": "^3.0.0-beta.11",
-    "ilp-plugin-lightning": "^1.0.0-beta.18",
+    "ilp-plugin-lightning": "^1.0.0-beta.21",
     "ilp-plugin-mini-accounts": "^4.0.2",
     "ilp-plugin-xrp-asym-server": "^1.8.0",
     "ilp-plugin-xrp-paychan": "^2.4.1",

@@ -26,7 +26,7 @@ process.env = {
 }
 
 const debugEnv = {
-  // DEBUG: 'ilp*,moneyd*,connector*,ioredis*',
+  DEBUG: 'ilp*,switch*,connector*',
   FORCE_COLOR: '1',
   DEBUG_COLORS: 'yes',
   DEBUG_SHOW_HIDDEN: 'enabled'
@@ -72,7 +72,7 @@ ecosystem.apps.forEach((app, i) => {
   if (process.env.NODE_ENV !== 'production') {
     let port = execa.shellSync(`get-port ${ports.join(' ')}`).stdout
     ports = ports.filter(v => v != port)
-    app.node_args.push(`--inspect-brk=${port}`)
+    // app.node_args.push(`--inspect-brk=${port}`)s
   }
 })
 
