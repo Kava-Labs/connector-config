@@ -1,9 +1,20 @@
-const { createApp } = require('ilp-connector')
-const { connectCoinCap } = require('@kava-labs/crypto-rate-utils')
+const { createApp } = require('@kava-labs/ilp-connector')
+const {
+  convert,
+  usd,
+  xrp,
+  xrpBase,
+  connectCoinCap
+} = require('@kava-labs/crypto-rate-utils')
 const { parse, resolve } = require('path')
 const chokidar = require('chokidar')
 
 async function run() {
+  const rateApi = await connectCoinCap()
+
+  const outgoingChannelAmount = convert(usd(10), xrpBase(), rateApi).toString()
+  const maxPacketAmount = convert(usd(0.2), xrpBase(), rateApi).toString()
+
   const config = {
     env: process.env.CONNECTOR_ENV,
     adminApi: true,
@@ -18,10 +29,40 @@ async function run() {
       host: '127.0.0.1',
       port: 6379
     },
+    accountProviders: {
+      servers: {
+        type: 'plugin'
+      },
+      xrp: {
+        type: 'btp-server',
+        options: {
+          listener: {
+            port: 7443
+          },
+          defaultAccountInfo: {
+            plugin: 'ilp-plugin-xrp-paychan',
+            relation: 'child',
+            assetCode: 'XRP',
+            assetScale: 9,
+            // Options passed into the plugin itself
+            options: {
+              assetScale: 9,
+              xrpServer: process.env.XRP_SERVER,
+              secret: process.env.XRP_SECRET,
+              channelAmount: outgoingChannelAmount
+            },
+            balance: {
+              maximum: '0',
+              settleTo: '0',
+              settleThreshold: '0'
+            },
+            maxPacketAmount
+          }
+        }
+      }
+    },
     accounts: {}
   }
-
-  const rateApi = await connectCoinCap()
 
   const { listen, addPlugin, removePlugin } = createApp(config)
 
