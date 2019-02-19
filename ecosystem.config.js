@@ -45,19 +45,19 @@ const ecosystem = {
         ...debugEnv
       },
       log: '~/.pm2/logs/ilp-connector-combined.log'
-    },
-    {
-      cwd: __dirname,
-      name: 'moneyd-gui',
-      script: path.join(__dirname, 'node_modules/moneyd-gui'),
-      node_args: [],
-      args: ['--colors'],
-      env: {
-        PORT: '7770',
-        ADMIN_API_PORT: '7769',
-        ...debugEnv
-      }
     }
+    // {
+    //   cwd: __dirname,
+    //   name: 'moneyd-gui',
+    //   script: path.join(__dirname, 'node_modules/moneyd-gui'),
+    //   node_args: [],
+    //   args: ['--colors'],
+    //   env: {
+    //     PORT: '7770',
+    //     ADMIN_API_PORT: '7769',
+    //     ...debugEnv
+    //   }
+    // }
   ]
 }
 
@@ -72,7 +72,7 @@ ecosystem.apps.forEach((app, i) => {
   if (process.env.NODE_ENV !== 'production') {
     let port = execa.shellSync(`get-port ${ports.join(' ')}`).stdout
     ports = ports.filter(v => v != port)
-    // app.node_args.push(`--inspect-brk=${port}`)s
+    app.node_args.push(`--inspect-brk=${port}`)
   }
 })
 
