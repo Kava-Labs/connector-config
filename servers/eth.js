@@ -9,9 +9,10 @@ const getGasPrice = async () => {
   return convert(gwei(data.fast / 10), wei())
 }
 
-module.exports = rateApi => {
-  const outgoingChannelAmount = convert(usd(10), gwei(), rateApi)
-  const maxPacketAmount = convert(usd(0.2), gwei(), rateApi)
+module.exports = rateBackend => {
+  const outgoingChannelAmount = convert(usd(10), gwei(), rateBackend)
+  const minIncomingChannelAmount = convert(usd(0.5), gwei(), rateBackend)
+  const maxPacketAmount = convert(usd(0.2), gwei(), rateBackend)
 
   return {
     relation: 'child',
@@ -26,6 +27,7 @@ module.exports = rateApi => {
       port: 7442,
       incomingChannelFee: 0,
       outgoingChannelAmount,
+      minIncomingChannelAmount,
       balance: {
         maximum: '0',
         settleTo: '0',

@@ -4,7 +4,7 @@ const { parse, resolve } = require('path')
 const chokidar = require('chokidar')
 
 async function run() {
-  const rateApi = await connectCoinCap()
+  const rateBackend = await connectCoinCap()
 
   const config = {
     env: process.env.CONNECTOR_ENV,
@@ -46,7 +46,7 @@ async function run() {
     const { name: accountId, ext } = parse(path)
     if (ext === '.js') {
       const createConfig = require(resolve(path))
-      const accountConfig = createConfig(rateApi)
+      const accountConfig = createConfig(rateBackend)
 
       await addPlugin(accountId, accountConfig)
     }

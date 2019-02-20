@@ -1,9 +1,13 @@
 const { convert, usd, xrpBase, drop } = require('@kava-labs/crypto-rate-utils')
 
-module.exports = rateApi => {
-  const outgoingChannelAmount = convert(usd(10), drop(), rateApi).toNumber()
-  const minIncomingChannelAmount = convert(usd(0.5), drop(), rateApi).toNumber()
-  const maxPacketAmount = convert(usd(0.2), xrpBase(), rateApi)
+module.exports = rateBackend => {
+  const outgoingChannelAmount = convert(usd(10), drop(), rateBackend).toNumber()
+  const minIncomingChannelAmount = convert(
+    usd(0.5),
+    drop(),
+    rateBackend
+  ).toNumber()
+  const maxPacketAmount = convert(usd(0.2), xrpBase(), rateBackend)
 
   return {
     relation: 'child',

@@ -1,6 +1,6 @@
 const { convert, usd, satoshi } = require('@kava-labs/crypto-rate-utils')
 
-module.exports = rateApi => ({
+module.exports = rateBackend => ({
   relation: 'child',
   plugin: 'ilp-plugin-lightning',
   assetCode: 'BTC',
@@ -20,6 +20,6 @@ module.exports = rateApi => ({
       settleThreshold: 0
     },
     // In plugin (and not connector middleware) so F08s occur *before* T04s
-    maxPacketAmount: convert(usd(0.2), satoshi(), rateApi)
+    maxPacketAmount: convert(usd(0.2), satoshi(), rateBackend)
   }
 })
