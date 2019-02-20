@@ -72,7 +72,7 @@ ecosystem.apps.forEach((app, i) => {
   if (process.env.NODE_ENV !== 'production') {
     let port = execa.shellSync(`get-port ${ports.join(' ')}`).stdout
     ports = ports.filter(v => v != port)
-    app.node_args.push(`--inspect-brk=${port}`)
+    app.node_args.push(`--inspect=${port}`)
   }
 })
 
