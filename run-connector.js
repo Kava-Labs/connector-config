@@ -1,9 +1,11 @@
-const { createApp } = require('ilp-connector')
+const { createApp } = require('@kava-labs/ilp-connector')
 const { connectCoinCap } = require('@kava-labs/crypto-rate-utils')
 const { parse, resolve } = require('path')
 const chokidar = require('chokidar')
 
 async function run() {
+  const rateBackend = await connectCoinCap()
+
   const config = {
     env: process.env.CONNECTOR_ENV,
     adminApi: true,
@@ -18,10 +20,13 @@ async function run() {
       host: '127.0.0.1',
       port: 6379
     },
+    accountProviders: {
+      servers: {
+        type: 'plugin'
+      }
+    },
     accounts: {}
   }
-
-  const rateApi = await connectCoinCap()
 
   const { listen, addPlugin, removePlugin } = createApp(config)
 
@@ -41,7 +46,7 @@ async function run() {
     const { name: accountId, ext } = parse(path)
     if (ext === '.js') {
       const createConfig = require(resolve(path))
-      const accountConfig = createConfig(rateApi)
+      const accountConfig = createConfig(rateBackend)
 
       await addPlugin(accountId, accountConfig)
     }

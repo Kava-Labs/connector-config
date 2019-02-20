@@ -21,12 +21,12 @@ const env = {
 
 process.env = {
   ...env,
-  ...getEnvkeys(process.env.ENVKEY || env.ENVKEY),
-  ...process.env
+  ...process.env,
+  ...getEnvkeys(process.env.ENVKEY || env.ENVKEY)
 }
 
 const debugEnv = {
-  DEBUG: 'ilp*,moneyd*,connector*,ioredis*',
+  DEBUG: 'ilp*,switch*,connector*',
   FORCE_COLOR: '1',
   DEBUG_COLORS: 'yes',
   DEBUG_SHOW_HIDDEN: 'enabled'
@@ -45,19 +45,19 @@ const ecosystem = {
         ...debugEnv
       },
       log: '~/.pm2/logs/ilp-connector-combined.log'
-    },
-    {
-      cwd: __dirname,
-      name: 'moneyd-gui',
-      script: path.join(__dirname, 'node_modules/moneyd-gui'),
-      node_args: [],
-      args: ['--colors'],
-      env: {
-        PORT: '7770',
-        ADMIN_API_PORT: '7769',
-        ...debugEnv
-      }
     }
+    // {
+    //   cwd: __dirname,
+    //   name: 'moneyd-gui',
+    //   script: path.join(__dirname, 'node_modules/moneyd-gui'),
+    //   node_args: [],
+    //   args: ['--colors'],
+    //   env: {
+    //     PORT: '7770',
+    //     ADMIN_API_PORT: '7769',
+    //     ...debugEnv
+    //   }
+    // }
   ]
 }
 

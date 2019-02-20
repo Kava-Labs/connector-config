@@ -1,8 +1,13 @@
 const { convert, usd, xrpBase, drop } = require('@kava-labs/crypto-rate-utils')
 
-module.exports = rateApi => {
-  const outgoingChannelAmount = convert(usd(10), drop(), rateApi).toNumber()
-  const maxPacketAmount = convert(usd(0.1), xrpBase(), rateApi)
+module.exports = rateBackend => {
+  const outgoingChannelAmount = convert(usd(10), drop(), rateBackend).toNumber()
+  const minIncomingChannelAmount = convert(
+    usd(0.5),
+    drop(),
+    rateBackend
+  ).toNumber()
+  const maxPacketAmount = convert(usd(0.2), xrpBase(), rateBackend)
 
   return {
     relation: 'child',
@@ -16,8 +21,11 @@ module.exports = rateApi => {
       address: process.env.XRP_ADDRESS,
       secret: process.env.XRP_SECRET,
       // Max credit defaults to 0, so it's unnecesssary
-      maxPacketAmount /* In plugin (and not connector middleware) so F08s occur *before* T04s */,
-      outgoingChannelAmount
+      // Use plugin maxPacketAmount (and not connector middleware) so F08s occur *before* T04s
+      maxPacketAmount,
+      // Very asymmetric... you fund a channel for $0.50 in XRP, we'll open one to you for $10!
+      outgoingChannelAmount,
+      minIncomingChannelAmount
     }
   }
 }
