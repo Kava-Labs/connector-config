@@ -7,13 +7,13 @@ module.exports = rateBackend => ({
   assetScale: 8,
   options: {
     role: 'server',
+    port: 7441,
     lnd: {
       tlsCert: process.env.LIGHTNING_TLS_CERT_PATH,
       macaroon: process.env.LIGHTNING_MACAROON_PATH,
       hostname: process.env.LIGHTNING_LND_HOST,
       grpcPort: parseInt(process.env.LIGHTNING_GRPC_PORT)
     },
-    port: 7441,
     balance: {
       maximum: 0,
       settleTo: 0,
