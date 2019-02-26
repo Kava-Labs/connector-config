@@ -1,29 +1,7 @@
-const dotenv = require('dotenv')
-const { fetch: fetchEnvkeys } = require('envkey/loader')
 const os = require('os')
-const fs = require('fs')
 const path = require('path')
 const execa = require('execa')
-
-const readDotFile = dotfile => {
-  const dotfilePath = path.join(process.cwd(), dotfile)
-  if (fs.existsSync(dotfilePath)) {
-    return dotenv.parse(fs.readFileSync(dotfilePath))
-  }
-}
-
-const getEnvkeys = envkey => envkey && fetchEnvkeys(envkey)
-
-const env = {
-  ...readDotFile('.env'),
-  ...readDotFile('.env.local')
-}
-
-process.env = {
-  ...env,
-  ...process.env,
-  ...getEnvkeys(process.env.ENVKEY || env.ENVKEY)
-}
+require('envkey')
 
 const debugEnv = {
   DEBUG: 'ilp*,switch*,connector*',
@@ -68,11 +46,11 @@ let ports = [...Array(os.cpus().length * ecosystem.apps.length)].map((v, i) => {
   )
 })
 
-ecosystem.apps.forEach((app, i) => {
+ecosystem.apps.forEach(app => {
   if (process.env.NODE_ENV !== 'production') {
     let port = execa.shellSync(`get-port ${ports.join(' ')}`).stdout
     ports = ports.filter(v => v != port)
-    app.node_args.push(`--inspect=${port}`)
+    app.node_args.push(`--inspect-brk=${port}`)
   }
 })
 
