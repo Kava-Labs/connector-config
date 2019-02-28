@@ -24,8 +24,4 @@ const ecosystem = {
   ]
 }
 
-if (process.env.NODE_ENV !== 'production') {
-  ecosystem.apps[0].node_args.push('--inspect-brk')
-}
-
 module.exports = ecosystem
