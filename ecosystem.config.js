@@ -15,7 +15,6 @@ const ecosystem = {
       name: 'ilp-connector',
       script: path.join(__dirname, 'run-connector.js'),
       node_args: [],
-      args: ['--colors'],
       env: {
         ...process.env,
         ...debugEnv
@@ -23,6 +22,10 @@ const ecosystem = {
       log: '~/.pm2/logs/ilp-connector-combined.log'
     }
   ]
+}
+
+if (process.env.NODE_ENV !== 'production') {
+  ecosystem.apps[0].node_args.push('--inspect-brk')
 }
 
 module.exports = ecosystem
