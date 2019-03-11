@@ -27,7 +27,8 @@ module.exports = rateBackend => {
       getGasPrice: process.env.CONNECTOR_ENV === 'production' && getGasPrice,
       outgoingChannelAmount,
       minIncomingChannelAmount,
-      maxPacketAmount // In plugin (and not connector middleware) so F08s occur *before* T04s
+      // In plugin (and not connector middleware) so F08s occur *before* T04s
+      maxPacketAmount
     }
   }
 }
