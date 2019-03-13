@@ -33,7 +33,7 @@
     "envkey": "^1.2.2",
     "ilp-connector": "^22.2.0",
     "ilp-plugin-ethereum": "^3.0.0-beta.14",
-    "ilp-plugin-lightning": "^1.0.0-beta.21",
+    "ilp-plugin-lightning": "^1.0.0-beta.23",
     "ilp-plugin-mini-accounts": "^4.0.2",
     "pm2": "^3.2.3"
   },

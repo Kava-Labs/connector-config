@@ -14,11 +14,6 @@ module.exports = rateBackend => ({
       hostname: process.env.LIGHTNING_LND_HOST,
       grpcPort: parseInt(process.env.LIGHTNING_GRPC_PORT)
     },
-    balance: {
-      maximum: 0,
-      settleTo: 0,
-      settleThreshold: 0
-    },
     // In plugin (and not connector middleware) so F08s occur *before* T04s
     maxPacketAmount: convert(usd(0.2), satoshi(), rateBackend)
   }
