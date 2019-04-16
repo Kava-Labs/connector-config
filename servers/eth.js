@@ -1,4 +1,4 @@
-const { convert, usd, gwei } = require('@kava-labs/crypto-rate-utils')
+const { convert, usd, gwei, wei } = require('@kava-labs/crypto-rate-utils')
 const axios = require('axios')
 
 const getGasPrice = async () => {
