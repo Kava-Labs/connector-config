@@ -16,13 +16,11 @@ module.exports = rateApi => {
       settleTo: '0'
     },
     options: {
-      assetScale: 9,
       listener: {
-        port: 7444,
+        port: 7541,
         secret: process.env.NIKHIL_SECRET
       },
       xrpServer: process.env.XRP_SERVER,
-      address: process.env.XRP_ADDRESS,
       secret: process.env.XRP_SECRET
     }
   }
