@@ -21,7 +21,8 @@ module.exports = rateApi => {
         secret: process.env.NIKHIL_SECRET
       },
       xrpServer: process.env.XRP_SERVER,
-      secret: process.env.XRP_SECRET
+      secret: process.env.XRP_SECRET,
+      peerAddress: process.env.NIKHIL_PEER_XRP_ADDRESS
     }
   }
 }
