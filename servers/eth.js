@@ -10,7 +10,7 @@ const getGasPrice = async () => {
 }
 
 module.exports = rateBackend => {
-  const outgoingChannelAmount = convert(usd(10), gwei(), rateBackend)
+  const outgoingChannelAmount = convert(usd(20), gwei(), rateBackend)
   const minIncomingChannelAmount = convert(usd(0.5), gwei(), rateBackend)
   const maxPacketAmount = convert(usd(0.2), gwei(), rateBackend)
 
