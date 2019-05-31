@@ -1,6 +1,11 @@
-const { convert, usd, satoshi } = require('@kava-labs/crypto-rate-utils')
+const sat = {
+  symbol: 'BTC',
+  exchangeScale: 8,
+  accountScale: 0,
+  scale: 0
+}
 
-module.exports = rateBackend => ({
+module.exports = convertUsdTo => ({
   relation: 'child',
   plugin: 'ilp-plugin-lightning',
   assetCode: 'BTC',
@@ -15,6 +20,6 @@ module.exports = rateBackend => ({
       grpcPort: parseInt(process.env.LIGHTNING_GRPC_PORT)
     },
     // In plugin (and not connector middleware) so F08s occur *before* T04s
-    maxPacketAmount: convert(usd(0.2), satoshi(), rateBackend)
+    maxPacketAmount: convertUsdTo(0.2, sat)
   }
 })

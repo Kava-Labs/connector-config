@@ -1,8 +1,13 @@
-const { convert, usd, xrpBase } = require('@kava-labs/crypto-rate-utils')
+const nanoXrp = {
+  symbol: 'XRP',
+  exchangeScale: 6,
+  accountScale: -3,
+  scale: -3
+}
 
-module.exports = rateApi => {
-  const maxPacketAmount = convert(usd(0.1), xrpBase(), rateApi).toString()
-  const maximum = convert(usd(2), xrpBase(), rateApi).toString()
+module.exports = convertUsdTo => {
+  const maxPacketAmount = convertUsdTo(0.1, nanoXrp).toString()
+  const maximum = convertUsdTo(2, nanoXrp).toString()
 
   return {
     relation: 'peer',

@@ -1,9 +1,14 @@
-const { convert, usd, drop } = require('@kava-labs/crypto-rate-utils')
+const dropXrp = {
+  symbol: 'XRP',
+  exchangeScale: 6,
+  accountScale: 0,
+  scale: 0
+}
 
-module.exports = rateBackend => {
-  const outgoingChannelAmount = convert(usd(20), drop(), rateBackend)
-  const minIncomingChannelAmount = convert(usd(0.5), drop(), rateBackend)
-  const maxPacketAmount = convert(usd(0.2), drop(), rateBackend)
+module.exports = convertUsdTo => {
+  const outgoingChannelAmount = convertUsdTo(20, dropXrp)
+  const minIncomingChannelAmount = convertUsdTo(0.5, dropXrp)
+  const maxPacketAmount = convertUsdTo(0.2, dropXrp)
 
   return {
     relation: 'child',

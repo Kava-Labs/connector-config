@@ -1,5 +1,9 @@
 const { createApp } = require('@kava-labs/ilp-connector')
-const { connectCoinCap } = require('@kava-labs/crypto-rate-utils')
+const {
+  convert,
+  connectCoinCap,
+  exchangeQuantity
+} = require('@kava-labs/crypto-rate-utils')
 const { parse, resolve } = require('path')
 const chokidar = require('chokidar')
 
@@ -13,7 +17,7 @@ async function run() {
     ilpAddress: process.env.ILP_ADDRESS,
     spread: 0,
     backend: '@kava-labs/ilp-backend-crypto',
-    store: '@kava-labs/ilp-store-redis',
+    store: 'ilp-store-redis',
     storeConfig: {
       password: process.env.REDIS_PASS,
       prefix: 'connector',
@@ -50,7 +54,24 @@ async function run() {
     const { name: accountId, ext } = parse(path)
     if (ext === '.js') {
       const createConfig = require(resolve(path))
-      const accountConfig = createConfig(rateBackend)
+
+      // Convert the given amount of USD to the given unit
+      const convertUsdTo = (usdAmount, unit) =>
+        convert(
+          exchangeQuantity(
+            {
+              symbol: 'USD',
+              exchangeScale: 2,
+              accountScale: 2,
+              scale: 2
+            },
+            usdAmount
+          ),
+          unit,
+          rateBackend
+        ).amount
+
+      const accountConfig = createConfig(convertUsdTo)
 
       await addPlugin(accountId, accountConfig)
     }
