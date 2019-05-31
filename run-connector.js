@@ -17,7 +17,7 @@ async function run() {
     ilpAddress: process.env.ILP_ADDRESS,
     spread: 0,
     backend: '@kava-labs/ilp-backend-crypto',
-    store: 'ilp-store-redis',
+    store: '@kava-labs/ilp-store-redis',
     storeConfig: {
       password: process.env.REDIS_PASS,
       prefix: 'connector',
