@@ -7,7 +7,6 @@ const dropXrp = {
 
 module.exports = convertUsdTo => {
   const outgoingChannelAmount = convertUsdTo(20, dropXrp)
-  const minIncomingChannelAmount = convertUsdTo(0.5, dropXrp)
   const maxPacketAmount = convertUsdTo(0.2, dropXrp)
 
   return {
@@ -21,7 +20,7 @@ module.exports = convertUsdTo => {
       xrpSecret: process.env.XRP_SECRET,
       xrpServer: process.env.XRP_SERVER,
       outgoingChannelAmount,
-      minIncomingChannelAmount,
+      minIncomingChannelAmount: 0,
       // Use plugin maxPacketAmount (and not connector middleware) so F08s occur *before* T04s
       maxPacketAmount
     }

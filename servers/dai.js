@@ -9,7 +9,6 @@ const gweiDai = {
 
 module.exports = convertUsdTo => {
   const outgoingChannelAmount = convertUsdTo(20, gweiDai)
-  const minIncomingChannelAmount = convertUsdTo(0.5, gweiDai)
   const maxPacketAmount = convertUsdTo(0.2, gweiDai)
 
   return {
@@ -24,7 +23,7 @@ module.exports = convertUsdTo => {
       ethereumProvider: process.env.ETHEREUM_PROVIDER,
       getGasPrice: process.env.CONNECTOR_ENV === 'production' && getGasPrice,
       outgoingChannelAmount,
-      minIncomingChannelAmount,
+      minIncomingChannelAmount: 0,
       // In plugin (and not connector middleware) so F08s occur *before* T04s
       maxPacketAmount,
       tokenAddress: process.env.DAI_TOKEN_ADDRESS
