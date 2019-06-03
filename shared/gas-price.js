@@ -1,3 +1,4 @@
+const BigNumber = require('bignumber.js')
 const axios = require('axios')
 
 const gweiToWei = num => new BigNumber(num).shiftedBy(9)
