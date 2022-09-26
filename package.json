@@ -35,7 +35,7 @@
     "ilp-plugin-ethereum": "^3.0.0-beta.20",
     "ilp-plugin-lightning": "^1.0.0-beta.25",
     "ilp-plugin-xrp-paychan": "^2.4.1",
-    "pm2": "^3.5.0"
+    "pm2": "^5.2.0"
   },
   "devDependencies": {
     "husky": "^1.2.0",
